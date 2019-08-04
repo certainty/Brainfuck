@@ -1,0 +1,55 @@
+name:                brainfuck
+version:             0.1.0.0
+synopsis:            Educational Brainfuck
+license:             GPL-3
+license-file:        LICENSE
+author:              David Krenztlin
+maintainer:          david@lisp-unleashed.de
+category:            Educational
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  default-language: Haskell2010
+  exposed-modules: Brainfuck.Compiler.Frontend.Lexer.Types,
+                   Brainfuck.Compiler.Frontend.Lexer.Lexer,
+                   Brainfuck.Compiler.Frontend.Parser.Types,
+                   Brainfuck.Compiler.Frontend.Parser.Parser,
+                   Brainfuck.Compiler.Backend.Intermediate.Types,
+                   Brainfuck.Compiler.Backend.Intermediate.Intermediate,
+                   Brainfuck.Compiler.Backend.CodeGeneration.VM.StackMachine.StackMachine,
+                   Brainfuck.Compiler.Backend.CodeGeneration.VM.StackMachine.Bytecode,
+                   Brainfuck.Compiler.Backend.CodeGeneration.VM.StackMachine.Assembly,
+                   Brainfuck.Compiler.Compiler,
+                   Brainfuck.Compiler.Application,
+                   Brainfuck.VM.StackMachine.Machine,
+                   Brainfuck.VM.StackMachine.Application
+
+  hs-source-dirs: src/lib
+  build-depends: base, bytestring, containers, array, mtl, dlist, binary, zlib
+
+test-suite hspec
+    build-depends:    base, brainfuck, hspec, containers, QuickCheck
+    default-language: Haskell2010
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    type:             exitcode-stdio-1.0
+
+executable bfc
+  default-language: Haskell2010
+  hs-source-dirs: src/bfc
+  main-is: Main.hs
+  build-depends: base, brainfuck
+
+executable bfsvm
+  default-language: Haskell2010
+  hs-source-dirs: src/bfvm/stack
+  main-is: Main.hs
+  build-depends: base, brainfuck
+
+-- register vm
+-- executable bfrvm
+--   default-language: Haskell2010
+--   hs-source-dirs: src/bfc
+--   main-is: Main.hs
+--   build-depends: base, brainfuck

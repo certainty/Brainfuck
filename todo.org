@@ -1,0 +1,7 @@
+* TODO Think about how one can test code that runs inside the vm monad
+  - Probably having too modules that do the io where one just adds to the writer
+    and the other runs inside IO? Then one could import vm.IO and VM.Test
+
+* TODO Assembly rename
+  - Load -> GET
+  - Store -> Set
